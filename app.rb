@@ -8,6 +8,9 @@ rescue LoadError
   Bundler.setup
 end
 
+#Bundler.require
+%w(sinatra bridge).each { |dependency| require dependency }
+
 get '/' do
   "Bridge score"
 end
