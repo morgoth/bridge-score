@@ -9,8 +9,18 @@ rescue LoadError
 end
 
 #Bundler.require
-%w(sinatra bridge).each { |dependency| require dependency }
+%w(sinatra bridge haml).each { |dependency| require dependency }
+
+configure do
+  set :app_file, __FILE__
+  set :haml, { :format => :html5 }
+end
 
 get '/' do
-  "Bridge score"
+  haml :home
+end
+
+post '/calculate' do
+  @score = Bridge::Score.new(:contract => params['contract'], :declarer => params['declarer'], :vulnerable => params['vulnerable'], :tricks => params['tricks'].to_i)
+  haml :home
 end

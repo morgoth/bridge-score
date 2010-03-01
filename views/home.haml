@@ -1,0 +1,31 @@
+%h2
+  Bridge Score
+- if @score
+  = @score.points
+
+%form{:method => "post", :action => "/calculate"}
+  %ul.inputs
+    %li
+      %label{:for => "contract_input"}
+        Contract
+        %abbr{:class => 'required', :title => "Required"}> *
+      %input{:type => "text", :id => 'contract_input', :name => "contract", :value => params['contract']}
+    %li
+      %label{:for => "declarer_input"}
+        Declarer
+        %abbr{:class => 'required', :title => "Required"}> *
+      %input{:type => "text", :id => 'declarer_input', :name => "declarer", :value => params['declarer']}
+    %li
+      %label{:for => "vulnerable_input"}
+        Vulnerable
+        %abbr{:class => 'required', :title => "Required"}> *
+      %input{:type => "text", :id => 'vulnerable_input', :name => "vulnerable", :value => params['vulnerable']}
+    %li
+      %label{:for => "tricks_input"}
+        Tricks
+        %abbr{:class => 'required', :title => "Required"}> *
+      %input{:type => "text", :id => 'tricks_input', :name => "tricks", :value => params['tricks']}
+  %ul.buttons
+    %li
+      %input{:type => "submit", :id => "submit_input", :name => "commit", :value => "Calculate"}
+
