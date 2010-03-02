@@ -22,7 +22,11 @@
       %label{:for => "vulnerable_input"}
         Vulnerable
         %abbr{:class => 'required', :title => "Required"}> *
-      %input{:type => "text", :id => 'vulnerable_input', :name => "vulnerable", :value => params['vulnerable']}
+      %select{:id => 'vulnerable_input', :name => "vulnerable"}
+        %option{:value => "NONE", :selected => params['vulnerable'] == "NONE" ? true : false} NONE
+        %option{:value => "BOTH", :selected => params['vulnerable'] == "BOTH" ? true : false} BOTH
+        %option{:value => "NS", :selected => params['vulnerable'] == "NS" ? true : false} NS
+        %option{:value => "EW", :selected => params['vulnerable'] == "EW" ? true : false} EW
     %li
       %label{:for => "tricks_input"}
         Tricks

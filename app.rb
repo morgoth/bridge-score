@@ -33,7 +33,6 @@ end
 
 get "/stylesheets/screen.css" do
   content_type 'text/css'
-
   sass :"stylesheets/screen", Compass.sass_engine_options
 end
 
