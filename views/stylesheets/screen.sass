@@ -1,0 +1,63 @@
+!blueprint_grid_columns = 12
+!blueprint_container_size = 960px
+!blueprint_grid_margin  = 10px
+!blueprint_grid_width   = (!blueprint_container_size + !blueprint_grid_margin) / !blueprint_grid_columns - !blueprint_grid_margin
+!red_color = #EC2200
+!green_color = #31E400
+
+@import blueprint
+@import compass/reset, compass/utilities
+
+
++blueprint-typography
++blueprint-grid
+
+#container
+  +container
+
+#content
+  padding-top= 4*!blueprint_grid_margin
+  +push(1)
+  +column(10, true)
+  +no-bullets
+  font-size: 15px
+
+.notifications
+  +push(2)
+  +column(6, true)
+  width= 6 * !blueprint_grid_width
+  padding: 0.5em 0 0.5em 0.5em
+  text-align: center
+
+.errors
+  color= !red_color
+  border= 2px "solid"
+.success
+  color= !green_color
+  border= 2px "solid"
+
+abbr
+  border: 0
+  font-variant: normal
+  font-weight: normal
+
+.required
+  color= !red_color
+
+form
+  +push(2)
+  +column(6, true)
+  .inputs
+    input, textarea
+      width= !blueprint_grid_width
+      display: block
+  label
+    dipslay: block
+  ul
+    margin: 0
+    text-align: left
+    li
+      margin-bottom: 1em
+
+
+

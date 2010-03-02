@@ -1,7 +1,10 @@
 %h2
   Bridge Score
-- if @score
-  = @score.points
+.notifications
+  - if @errors
+    .errors= @errors
+  - if @score
+    .success= @score.points
 
 %form{:method => "post", :action => "/calculate"}
   %ul.inputs
