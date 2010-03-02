@@ -14,22 +14,15 @@
         %abbr{:class => 'required', :title => "Required"}> *
       %input{:type => "text", :id => 'contract_input', :name => "contract", :value => params['contract']}
     %li
-      %label{:for => "declarer_input"}
-        Declarer
-        %abbr{:class => 'required', :title => "Required"}> *
-      %input{:type => "text", :id => 'declarer_input', :name => "declarer", :value => params['declarer']}
-    %li
       %label{:for => "vulnerable_input"}
-        Vulnerable
+        Vulnerable?
         %abbr{:class => 'required', :title => "Required"}> *
       %select{:id => 'vulnerable_input', :name => "vulnerable"}
-        %option{:value => "NONE", :selected => params['vulnerable'] == "NONE" ? true : false} NONE
-        %option{:value => "BOTH", :selected => params['vulnerable'] == "BOTH" ? true : false} BOTH
-        %option{:value => "NS", :selected => params['vulnerable'] == "NS" ? true : false} NS
-        %option{:value => "EW", :selected => params['vulnerable'] == "EW" ? true : false} EW
+        %option{:value => "0", :selected => params['vulnerable'] == "0" ? true : false} No
+        %option{:value => "1", :selected => params['vulnerable'] == "1" ? true : false} Yes
     %li
       %label{:for => "tricks_input"}
-        Tricks
+        Tricks (+2, -1, = also supported)
         %abbr{:class => 'required', :title => "Required"}> *
       %input{:type => "text", :id => 'tricks_input', :name => "tricks", :value => params['tricks']}
   %ul.buttons

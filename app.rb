@@ -42,7 +42,7 @@ end
 
 post '/calculate' do
   if valid?(params)
-    @score = Bridge::Score.new(:contract => params['contract'], :declarer => params['declarer'], :vulnerable => params['vulnerable'], :tricks => params['tricks'].to_i)
+    @score = Bridge::Score.new(:contract => params['contract'], :vulnerable => (params['vulnerable'] == '1' ? true : false), :tricks => params['tricks'])
   else
     @errors = "All fields are required"
   end
