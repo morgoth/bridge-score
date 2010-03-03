@@ -47,6 +47,10 @@ abbr
 form
   +push(2)
   +column(6, true)
+  .hint
+    margin: 0
+    color: gray
+    font-size: 13px
   .inputs
     input, textarea, select
       width= !blueprint_grid_width
@@ -58,3 +62,8 @@ form
     text-align: left
     li
       margin-bottom: 1em
+
+form.inline
+  .inputs
+    input
+      width= 2 * !blueprint_grid_width

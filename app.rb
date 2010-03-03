@@ -48,3 +48,13 @@ post '/calculate' do
   end
   haml :home
 end
+
+post '/calculate_inline' do
+  if valid?(params)
+    attrs = params['inline'].split(',').each { |p| p.strip! }
+    @score = Bridge::Score.new(:contract => attrs[0], :tricks => attrs[1], :vulnerable => (attrs.size == 3))
+  else
+    @errors = "All fields are required"
+  end
+  haml :home
+end

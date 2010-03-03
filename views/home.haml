@@ -12,7 +12,15 @@
       %label{:for => "contract_input"}
         Contract
         %abbr{:class => 'required', :title => "Required"}> *
+      %p.hint 1C, 3D, 6HX, 6S, 7NTXX
       %input{:type => "text", :id => 'contract_input', :name => "contract", :value => params['contract']}
+    %li
+      %label{:for => "tricks_input"}
+        Tricks
+        %abbr{:class => 'required', :title => "Required"}> *
+      %p.hint
+        8, 12, or relative to level +2, -1, =
+      %input{:type => "text", :id => 'tricks_input', :name => "tricks", :value => params['tricks']}
     %li
       %label{:for => "vulnerable_input"}
         Vulnerable?
@@ -20,12 +28,18 @@
       %select{:id => 'vulnerable_input', :name => "vulnerable"}
         %option{:value => "0", :selected => params['vulnerable'] == "0" ? true : false} No
         %option{:value => "1", :selected => params['vulnerable'] == "1" ? true : false} Yes
-    %li
-      %label{:for => "tricks_input"}
-        Tricks (+2, -1, = also supported)
-        %abbr{:class => 'required', :title => "Required"}> *
-      %input{:type => "text", :id => 'tricks_input', :name => "tricks", :value => params['tricks']}
   %ul.buttons
     %li
       %input{:type => "submit", :id => "submit_input", :name => "commit", :value => "Calculate"}
 
+%form{:method => "post", :action => "/calculate_inline", :class => "inline"}
+  %ul.inputs
+    %li
+      %label{:for => "inline_input"}
+        Contract, tricks, vulnerable
+      %p.hint
+        1C, +1, v; 4HX, =
+      %input{:type => "text", :id => 'inline_input', :name => "inline", :value => params['inline']}
+  %ul.buttons
+    %li
+      %input{:type => "submit", :id => "submit_inline_input", :name => "commit", :value => "Calculate inline"}
