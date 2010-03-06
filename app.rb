@@ -42,7 +42,7 @@ end
 
 post '/calculate' do
   if valid?(params)
-    @score = Bridge::Score.new(:contract => params['contract'], :vulnerable => (params['vulnerable'] == '1' ? true : false), :tricks => params['tricks'])
+    @result = Bridge::Score.new(:contract => params['contract'], :vulnerable => (params['vulnerable'] == '1' ? true : false), :tricks => params['tricks']).points
   else
     @errors = "All fields are required"
   end
@@ -52,7 +52,21 @@ end
 post '/calculate_inline' do
   if valid?(params)
     attrs = params['inline'].split(',').each { |p| p.strip! }
-    @score = Bridge::Score.new(:contract => attrs[0], :tricks => attrs[1], :vulnerable => (attrs.size == 3))
+    @result = Bridge::Score.new(:contract => attrs[0], :tricks => attrs[1], :vulnerable => (attrs.size == 3)).points
+  else
+    @errors = "All fields are required"
+  end
+  haml :home
+end
+
+post '/points' do
+  if valid?(params)
+    contracts = Bridge::Score.with_points(params[:points].to_i)
+    if contracts.empty?
+      @errors = "Not found contracts with given points"
+    else
+      @result = contracts.join("<br/>")
+    end
   else
     @errors = "All fields are required"
   end

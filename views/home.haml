@@ -3,8 +3,8 @@
 .notifications
   - if @errors
     .errors= @errors
-  - if @score
-    .success= @score.points
+  - if @result
+    .success= @result
 
 %form{:method => "post", :action => "/calculate"}
   %ul.inputs
@@ -43,3 +43,15 @@
   %ul.buttons
     %li
       %input{:type => "submit", :id => "submit_inline_input", :name => "commit", :value => "Calculate inline"}
+
+%form{:method => "post", :action => "/points"}
+  %ul.inputs
+    %li
+      %label{:for => "points_input"}
+        Show all contracts with given result
+      %p.hint
+        = "-100, 620, 1430"
+      %input{:type => "text", :id => 'points', :name => "points", :value => params['points']}
+  %ul.buttons
+    %li
+      %input{:type => "submit", :id => "submit_points", :name => "commit", :value => "All contracts"}
