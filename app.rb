@@ -25,6 +25,10 @@ helpers do
   def valid?(attributes = {})
     attributes.values.all? { |p| !p.empty? }
   end
+
+  def contract_regexp(data)
+    data.match(/\A(?<contract>([1-7])([CDHS]|NT)(X{1,2})?)(?<result>(=|\+[1-6]|-([1-9]|1[0-3])))\Z/)
+  end
 end
 
 get "/stylesheets/screen.css" do
@@ -38,17 +42,15 @@ end
 
 post '/calculate' do
   if valid?(params)
-    @result = Bridge::Score.new(:contract => params['contract'], :vulnerable => (params['vulnerable'] == '1' ? true : false), :tricks => params['tricks']).points
-  else
-    @errors = "All fields are required"
-  end
-  haml :home
-end
-
-post '/calculate_inline' do
-  if valid?(params)
-    attrs = params['inline'].split(',').each { |p| p.strip! }
-    @result = Bridge::Score.new(:contract => attrs[0], :tricks => attrs[1], :vulnerable => (attrs.size == 3)).points
+    if score = contract_regexp(params[:contract])
+      begin
+        @result = Bridge::Score.new(:contract => score[:contract], :tricks => score[:result], :vulnerable => !params[:vulnerable].nil?).points
+      rescue ArgumentError => e
+        @errors = e.message
+      end
+    else
+      @errors = "Wrong input: #{params[:contract]}"
+    end
   else
     @errors = "All fields are required"
   end
@@ -59,7 +61,7 @@ post '/points' do
   if valid?(params)
     contracts = Bridge::Score.with_points(params[:points].to_i)
     if contracts.empty?
-      @errors = "Not found contracts with given points"
+      @errors = "Contracts not found with: #{params[:points]}"
     else
       @result = contracts.join("<br/>")
     end

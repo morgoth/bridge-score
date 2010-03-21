@@ -10,39 +10,17 @@
   %ul.inputs
     %li
       %label{:for => "contract_input"}
-        Contract
+        Contract with result
         %abbr{:class => 'required', :title => "Required"}> *
-      %p.hint 1C, 3D, 6HX, 6S, 7NTXX
+      %p.hint 1CX=, 1S+1, 3NT-1, 6SXX-1
       %input{:type => "text", :id => 'contract_input', :name => "contract", :value => params['contract']}
     %li
-      %label{:for => "tricks_input"}
-        Tricks
-        %abbr{:class => 'required', :title => "Required"}> *
-      %p.hint
-        8, 12, or relative to level +2, -1, =
-      %input{:type => "text", :id => 'tricks_input', :name => "tricks", :value => params['tricks']}
-    %li
+      %input{:class => "checkbox", :type => "checkbox", :id => 'vulnerable_input', :name => "vulnerable", :value => "1", :checked => !params["vulnerable"].nil?}
       %label{:for => "vulnerable_input"}
         Vulnerable?
-        %abbr{:class => 'required', :title => "Required"}> *
-      %select{:id => 'vulnerable_input', :name => "vulnerable"}
-        %option{:value => "0", :selected => params['vulnerable'] == "0" ? true : false} No
-        %option{:value => "1", :selected => params['vulnerable'] == "1" ? true : false} Yes
   %ul.buttons
     %li
       %input{:type => "submit", :id => "submit_input", :name => "commit", :value => "Calculate"}
-
-%form{:method => "post", :action => "/calculate_inline", :class => "inline"}
-  %ul.inputs
-    %li
-      %label{:for => "inline_input"}
-        Contract, tricks, vulnerable
-      %p.hint
-        1C, +1, v; 4HX, =
-      %input{:type => "text", :id => 'inline_input', :name => "inline", :value => params['inline']}
-  %ul.buttons
-    %li
-      %input{:type => "submit", :id => "submit_inline_input", :name => "commit", :value => "Calculate inline"}
 
 %form{:method => "post", :action => "/points"}
   %ul.inputs
