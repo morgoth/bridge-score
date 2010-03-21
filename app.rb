@@ -26,8 +26,8 @@ helpers do
     attributes.values.all? { |p| !p.empty? }
   end
 
-  def contract_regexp(data)
-    data.match(/\A(?<contract>([1-7])([CDHS]|NT)(X{1,2})?)(?<result>(=|\+[1-6]|-([1-9]|1[0-3])))\Z/)
+  def contract_match(data)
+    data.match(Bridge::Score::REGEXP)
   end
 end
 
@@ -42,7 +42,7 @@ end
 
 post '/calculate' do
   if valid?(params)
-    if score = contract_regexp(params[:contract])
+    if score = contract_match(params[:contract].upcase)
       begin
         @result = Bridge::Score.new(:contract => score[:contract], :tricks => score[:result], :vulnerable => !params[:vulnerable].nil?).points
       rescue ArgumentError => e
