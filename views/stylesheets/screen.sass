@@ -22,6 +22,10 @@
   +no-bullets
   font-size: 15px
 
+a
+  +hover-link
+  +link-colors(#333, #333, #333, #333, #333)
+
 .notifications
   +push(2)
   +column(6, true)
@@ -64,8 +68,3 @@ form
     text-align: left
     li
       margin-bottom: 1em
-
-form.inline
-  .inputs
-    input
-      width= 2 * !blueprint_grid_width
