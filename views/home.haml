@@ -4,29 +4,5 @@
   - if @result
     .success= @result
 
-%form{:method => "post", :action => "/calculate"}
-  %ul.inputs
-    %li
-      %label{:for => "contract_input"}
-        Contract with result
-        %abbr{:class => "required", :title => "Required"}> *
-      %p.hint 1CX=, 1S+1, 3NT-1, 6SXX-1
-      %input{:type => "text", :id => "contract_input", :name => "contract", :value => params[:contract]}
-    %li
-      %input{:class => "checkbox", :type => "checkbox", :id => "vulnerable_input", :name => "vulnerable", :value => "1", :checked => !params[:vulnerable].nil?}
-      %label{:for => "vulnerable_input"}
-        Vulnerable?
-  %ul.buttons
-    %li
-      %input{:type => "submit", :id => "submit_input", :name => "commit", :value => "Calculate"}
-
-%form{:method => "post", :action => "/points"}
-  %ul.inputs
-    %li
-      %label{:for => "points_input"}
-        Show all contracts with given result
-      %p.hint -100, 620, 1430
-      %input{:type => "text", :id => "points", :name => "points", :value => params[:points]}
-  %ul.buttons
-    %li
-      %input{:type => "submit", :id => "submit_points", :name => "commit", :value => "All contracts"}
+= haml(:"_contract", :layout => false)
+= haml(:"_points", :layout => false)

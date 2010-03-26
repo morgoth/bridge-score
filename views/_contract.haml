@@ -1,0 +1,14 @@
+%form{:method => "post", :action => "/calculate"}
+  %ul.inputs
+    %li
+      %label{:for => "contract_input"}
+        Contract with result
+      %p.hint 1CX=, 1S+1, 3NT-1, 6SXX-1
+      %input{:type => "text", :id => "contract_input", :name => "contract", :value => params[:contract]}
+    %li
+      %input{:class => "checkbox", :type => "checkbox", :id => "vulnerable_input", :name => "vulnerable", :value => "1", :checked => !params[:vulnerable].nil?}
+      %label{:for => "vulnerable_input"}
+        Vulnerable?
+  %ul.buttons
+    %li
+      %input{:type => "submit", :id => "submit_input", :name => "commit", :value => "Calculate"}

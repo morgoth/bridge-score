@@ -1,5 +1,5 @@
 begin
-  require File.expand_path('../.bundle/environment', __FILE__)
+  require File.expand_path("../.bundle/environment", __FILE__)
 rescue LoadError
   require "rubygems"
   require "bundler"
@@ -13,8 +13,8 @@ configure do
 
   Compass.configuration do |config|
     config.project_path = Sinatra::Application.root
-    config.sass_dir     = File.join('views', 'stylesheets')
-    config.images_dir = File.join('public', 'images')
+    config.sass_dir     = File.join("views", "stylesheets")
+    config.images_dir = File.join("public", "images")
     config.http_images_path = "/images"
     config.http_path = "/"
     config.http_stylesheets_path = "/stylesheets"
@@ -32,22 +32,34 @@ helpers do
 end
 
 get "/stylesheets/screen.css" do
-  content_type 'text/css'
+  content_type "text/css"
   sass :"stylesheets/screen", Compass.sass_engine_options
 end
 
-get '/' do
+get "/" do
   haml :home
 end
 
-post '/calculate' do
+get "/score/:score" do |input|
+  @input = input.gsub(" ", "+") # plus sign is eaten
+  score = @input.gsub(/(v)\Z/i, "")
+  vulnerable = $1.nil? ? false : true
+  if @contract = contract_match(score.upcase)
+    begin
+      @points = Bridge::Score.new(:contract => @contract[:contract], :tricks => @contract[:result], :vulnerable => vulnerable).points
+    rescue ArgumentError => e
+      @errors = e.message
+    end
+  else
+    @errors = "Wrong input: #{@input}"
+  end
+  haml :score
+end
+
+post "/calculate" do
   if valid?(params)
     if score = contract_match(params[:contract].upcase)
-      begin
-        @result = Bridge::Score.new(:contract => score[:contract], :tricks => score[:result], :vulnerable => !params[:vulnerable].nil?).points
-      rescue ArgumentError => e
-        @errors = e.message
-      end
+      redirect "/score/" << score[:contract] << score[:result] << (params[:vulnerable].nil? ? "" : "v")
     else
       @errors = "Wrong input: #{params[:contract]}"
     end
@@ -57,7 +69,7 @@ post '/calculate' do
   haml :home
 end
 
-post '/points' do
+post "/points" do
   if valid?(params)
     contracts = Bridge::Score.with_points(params[:points].to_i)
     if contracts.empty?

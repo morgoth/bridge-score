@@ -1,0 +1,10 @@
+%form{:method => "post", :action => "/points"}
+  %ul.inputs
+    %li
+      %label{:for => "points_input"}
+        Show all contracts with given points
+      %p.hint -100, 620, 1430
+      %input{:type => "text", :id => "points", :name => "points", :value => params[:points]}
+  %ul.buttons
+    %li
+      %input{:type => "submit", :id => "submit_points", :name => "commit", :value => "All contracts"}

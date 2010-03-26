@@ -1,0 +1,11 @@
+.notifications
+  - if @errors
+    .errors= @errors
+  - else
+    .success
+      = "Contract: #{@contract}"
+      %p
+        = "Points: #{@points}"
+
+= haml(:"_contract", :layout => false)
+= haml(:"_points", :layout => false)
