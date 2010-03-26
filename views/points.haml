@@ -1,0 +1,12 @@
+.notifications
+  - if @errors
+    .errors= @errors
+  - else
+    .success
+      = "Contracts with points: #{@input}"
+
+- unless @contracts.nil?
+  .contracts
+    %ul
+      - @contracts.each do |contract|
+        %li= contract

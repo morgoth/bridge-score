@@ -8,7 +8,6 @@
 @import blueprint
 @import compass/reset, compass/utilities
 
-
 +blueprint-typography
 +blueprint-grid
 
@@ -32,6 +31,7 @@ a
   width= 6 * !blueprint_grid_width
   padding: 0.5em 0 0.5em 0.5em
   text-align: center
+  +clearfix
 
 .errors
   color= !red_color
@@ -39,6 +39,10 @@ a
 .success
   color= !green_color
   border= 2px "solid"
+
+.contracts
+  +push(2)
+  +column(6, true)
 
 abbr
   border: 0

@@ -56,6 +56,17 @@ get "/score/:score" do |input|
   haml :score
 end
 
+get "/points/:result" do |input|
+  @input = input
+  if @input =~ /\A-?\d{2,4}\Z/
+    @contracts = Bridge::Score.with_points(@input.to_i)
+    @errors = "Contracts not found with: #{@input}" if @contracts.empty?
+  else
+    @errors = "Wrong input: #{@input}"
+  end
+  haml :points
+end
+
 post "/calculate" do
   if valid?(params)
     if score = contract_match(params[:contract].upcase)
@@ -71,11 +82,10 @@ end
 
 post "/points" do
   if valid?(params)
-    contracts = Bridge::Score.with_points(params[:points].to_i)
-    if contracts.empty?
-      @errors = "Contracts not found with: #{params[:points]}"
+    if params[:points] =~ /\A-?\d{2,4}\Z/
+      redirect "/points/" << params[:points]
     else
-      @result = contracts.join("<br/>")
+      @errors = "Wrong input: #{params[:points]}"
     end
   else
     @errors = "All fields are required"

@@ -9,5 +9,7 @@
     #container
       #content
         %h2
-          %a{:href => "/"} Calculate your Bridge score
+          %a{:href => "/"} Calculate Your Bridge Score
         = yield
+        = haml(:"_contract", :layout => false)
+        = haml(:"_points", :layout => false)
