@@ -4,5 +4,6 @@
   - else
     .success
       = "Contract: #{@contract}"
+      = " vulnerable" if @vulnerable
       %p
         = "Points: #{@points}"

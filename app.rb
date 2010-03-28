@@ -29,6 +29,12 @@ helpers do
   def contract_match(data)
     data.match(Bridge::Score::REGEXP)
   end
+
+  def render_suit(contract)
+    if contract =~ /[SHCD]/
+      contract.gsub("S","&spades;").gsub("C", "&clubs;").gsub("H", "<em class='red'>&hearts;</em>").gsub("D", "<em class='red'>&diams;</em>")
+    end
+  end
 end
 
 get "/stylesheets/screen.css" do
@@ -43,10 +49,10 @@ end
 get "/score/:score" do |input|
   @input = input.gsub(" ", "+") # plus sign is eaten
   score = @input.gsub(/(v)\Z/i, "")
-  vulnerable = $1.nil? ? false : true
+  @vulnerable = $1.nil? ? false : true
   if @contract = contract_match(score.upcase)
     begin
-      @points = Bridge::Score.new(:contract => @contract[:contract], :tricks => @contract[:result], :vulnerable => vulnerable).points
+      @points = Bridge::Score.new(:contract => @contract[:contract], :tricks => @contract[:result], :vulnerable => @vulnerable).points
     rescue ArgumentError => e
       @errors = e.message
     end
