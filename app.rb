@@ -33,6 +33,8 @@ helpers do
   def render_suit(contract)
     if contract =~ /[SHCD]/
       contract.gsub("S","&spades;").gsub("C", "&clubs;").gsub("H", "<em class='red'>&hearts;</em>").gsub("D", "<em class='red'>&diams;</em>")
+    else
+      contract
     end
   end
 end
