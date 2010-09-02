@@ -1,0 +1,19 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    bridge (0.0.26)
+    compass (0.10.5)
+      haml (>= 3.0.4)
+    haml (3.0.18)
+    rack (1.2.1)
+    sinatra (1.0)
+      rack (>= 1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bridge (>= 0.0.23)
+  compass
+  haml
+  sinatra (>= 1.0)
