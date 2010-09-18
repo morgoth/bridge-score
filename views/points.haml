@@ -10,5 +10,4 @@
     %ul
       - @contracts.each do |contract|
         %li
-          = render_suit(contract.gsub(/(v)\Z/, ""))
-          = " vulnerable" if $1
+          = render_suit(contract.gsub(/(v)\Z/, " vulnerable"))
