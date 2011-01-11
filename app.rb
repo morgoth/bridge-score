@@ -2,7 +2,7 @@ Bundler.require
 
 configure do
   set :app_file, __FILE__
-  set :haml, { :format => :html5 }
+  set :haml, {:format => :html5}
 
   Compass.configuration do |config|
     config.project_path = Sinatra::Application.root

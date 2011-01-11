@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source :rubygems
 
 gem "sinatra", ">=1.0"
 gem "bridge", ">=0.0.23"

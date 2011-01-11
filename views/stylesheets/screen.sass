@@ -8,6 +8,7 @@ $green_color: #31e400
 @import blueprint
 @import compass/reset
 @import compass/utilities
+@import compass/css3
 
 +blueprint-typography
 +blueprint-grid
@@ -78,3 +79,22 @@ form
     text-align: left
     li
       margin-bottom: 1em
+
+#github
+  left: -65px
+  height: 30px
+  top: 40px
+  position: absolute
+  text-decoration: none
+  width: 250px
+  +rotate(-45deg)
+  span
+    background: black
+    color: white
+    font-size: 14px
+    left: 0
+    padding: 5px 0
+    position: absolute
+    text-align: center
+    width: 250px
+    +box-shadow(rgba(black, 0.2), 1px, 1px, 10px)
