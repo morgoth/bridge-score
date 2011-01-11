@@ -1,1 +1,5 @@
-= App for calculating brdige score
+== App for calculating bridge score
+
+= Copyright
+
+Copyright (c) 2011 Wojciech Wnętrzak, released under the MIT license.
