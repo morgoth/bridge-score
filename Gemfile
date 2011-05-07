@@ -1,6 +1,7 @@
 source :rubygems
 
-gem "sinatra", ">=1.0"
+gem "sinatra"
 gem "bridge", ">=0.0.23"
 gem "haml"
+gem "sass"
 gem "compass"

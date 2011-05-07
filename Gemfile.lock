@@ -2,14 +2,19 @@ GEM
   remote: http://rubygems.org/
   specs:
     bridge (0.1.4)
-    compass (0.10.6)
-      haml (>= 3.0.4)
-    haml (3.0.25)
-    rack (1.2.1)
-    sinatra (1.2.0)
+    chunky_png (1.1.2)
+    compass (0.11.1)
+      chunky_png (~> 1.1)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    fssm (0.2.7)
+    haml (3.1.1)
+    rack (1.2.2)
+    sass (3.1.1)
+    sinatra (1.2.6)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
-    tilt (1.2.2)
+    tilt (1.3)
 
 PLATFORMS
   ruby
@@ -18,4 +23,5 @@ DEPENDENCIES
   bridge (>= 0.0.23)
   compass
   haml
-  sinatra (>= 1.0)
+  sass
+  sinatra
