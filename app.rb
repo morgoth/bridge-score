@@ -12,6 +12,7 @@ configure do
     config.http_path = "/"
     config.http_stylesheets_path = "/stylesheets"
   end
+  Encoding.default_external = 'utf-8'
 end
 
 helpers do
